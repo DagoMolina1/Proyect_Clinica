@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{915C0C34-9AC9-4276-974E-E704C2422D23}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ClinicaIPS_U</RootNamespace>
+    <AssemblyName>ClinicaIPS_U</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\AyudaDiagnosticaBL.cs" />
+    <Compile Include="Business\FacturacionBL.cs" />
+    <Compile Include="Business\LoginBL.cs" />
+    <Compile Include="Business\MedicamentoBL.cs" />
+    <Compile Include="Business\OrdenAyudaDiagnosticaBL.cs" />
+    <Compile Include="Business\OrdenBL.cs" />
+    <Compile Include="Business\OrdenMedicamentoBL.cs" />
+    <Compile Include="Business\OrdenProcedimientoBL.cs" />
+    <Compile Include="Business\PacienteBL.cs" />
+    <Compile Include="Business\ProcedimientoBL.cs" />
+    <Compile Include="Business\UsuarioBL.cs" />
+    <Compile Include="Data\AyudaDiagnosticaDAL.cs" />
+    <Compile Include="Data\ConexionDB.cs" />
+    <Compile Include="Data\FacturacionDAL.cs" />
+    <Compile Include="Data\MedicamentoDAL.cs" />
+    <Compile Include="Data\OrdenAyudaDiagnosticaDAL.cs" />
+    <Compile Include="Data\OrdenDAL.cs" />
+    <Compile Include="Data\OrdenMedicamentoDAL.cs" />
+    <Compile Include="Data\OrdenProcedimientoDAL.cs" />
+    <Compile Include="Data\PacienteDAL.cs" />
+    <Compile Include="Data\ProcedimientoDAL.cs" />
+    <Compile Include="Data\UsuarioDAL.cs" />
+    <Compile Include="Entities\AyudaDiagnostica.cs" />
+    <Compile Include="Entities\ContactoEmergencia.cs" />
+    <Compile Include="Entities\Facturacion.cs" />
+    <Compile Include="Entities\Medicamento.cs" />
+    <Compile Include="Entities\Orden.cs" />
+    <Compile Include="Entities\OrdenAyudaDiagnostica.cs" />
+    <Compile Include="Entities\OrdenMedicamento.cs" />
+    <Compile Include="Entities\OrdenProcedimiento.cs" />
+    <Compile Include="Entities\Paciente.cs" />
+    <Compile Include="Entities\Procedimiento.cs" />
+    <Compile Include="Entities\SeguroMedico.cs" />
+    <Compile Include="Entities\Usuario.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\AyudaDiagnosticaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AyudaDiagnosticaForm.Designer.cs">
+      <DependentUpon>AyudaDiagnosticaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FacturacionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FacturacionForm.Designer.cs">
+      <DependentUpon>FacturacionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MedicamentoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MedicamentoForm.Designer.cs">
+      <DependentUpon>MedicamentoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MenuPrincipal.Designer.cs">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\OrdenAyudaDiagnosticaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\OrdenAyudaDiagnosticaForm.Designer.cs">
+      <DependentUpon>OrdenAyudaDiagnosticaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\OrdenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\OrdenForm.Designer.cs">
+      <DependentUpon>OrdenForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\OrdenMedicamentoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\OrdenMedicamentoForm.Designer.cs">
+      <DependentUpon>OrdenMedicamentoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\OrdenProcedimientoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\OrdenProcedimientoForm.Designer.cs">
+      <DependentUpon>OrdenProcedimientoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\PacienteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\PacienteForm.Designer.cs">
+      <DependentUpon>PacienteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProcedimientoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ProcedimientoForm.Designer.cs">
+      <DependentUpon>ProcedimientoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UsuarioForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UsuarioForm.Designer.cs">
+      <DependentUpon>UsuarioForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Validations\Validador.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UI\AyudaDiagnosticaForm.resx">
+      <DependentUpon>AyudaDiagnosticaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FacturacionForm.resx">
+      <DependentUpon>FacturacionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MedicamentoForm.resx">
+      <DependentUpon>MedicamentoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MenuPrincipal.resx">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\OrdenAyudaDiagnosticaForm.resx">
+      <DependentUpon>OrdenAyudaDiagnosticaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\OrdenForm.resx">
+      <DependentUpon>OrdenForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\OrdenMedicamentoForm.resx">
+      <DependentUpon>OrdenMedicamentoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\OrdenProcedimientoForm.resx">
+      <DependentUpon>OrdenProcedimientoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\PacienteForm.resx">
+      <DependentUpon>PacienteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ProcedimientoForm.resx">
+      <DependentUpon>ProcedimientoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UsuarioForm.resx">
+      <DependentUpon>UsuarioForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
