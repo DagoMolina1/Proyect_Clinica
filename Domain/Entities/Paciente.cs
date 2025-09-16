@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClinicaIPS_U.Entities {
+namespace ClinicaIPS_U.Domain
+    .Entities {
     class Paciente {
         public int IdPaciente { get; set; }
         public string Cedula { get; set; }

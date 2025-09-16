@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>ClinicaIPS_U</RootNamespace>
     <AssemblyName>ClinicaIPS_U</AssemblyName>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -57,29 +58,39 @@
     <Compile Include="Business\PacienteBL.cs" />
     <Compile Include="Business\ProcedimientoBL.cs" />
     <Compile Include="Business\UsuarioBL.cs" />
-    <Compile Include="Data\AyudaDiagnosticaDAL.cs" />
-    <Compile Include="Data\ConexionDB.cs" />
-    <Compile Include="Data\FacturacionDAL.cs" />
-    <Compile Include="Data\MedicamentoDAL.cs" />
-    <Compile Include="Data\OrdenAyudaDiagnosticaDAL.cs" />
-    <Compile Include="Data\OrdenDAL.cs" />
-    <Compile Include="Data\OrdenMedicamentoDAL.cs" />
-    <Compile Include="Data\OrdenProcedimientoDAL.cs" />
-    <Compile Include="Data\PacienteDAL.cs" />
-    <Compile Include="Data\ProcedimientoDAL.cs" />
-    <Compile Include="Data\UsuarioDAL.cs" />
-    <Compile Include="Entities\AyudaDiagnostica.cs" />
-    <Compile Include="Entities\ContactoEmergencia.cs" />
-    <Compile Include="Entities\Facturacion.cs" />
-    <Compile Include="Entities\Medicamento.cs" />
-    <Compile Include="Entities\Orden.cs" />
-    <Compile Include="Entities\OrdenAyudaDiagnostica.cs" />
-    <Compile Include="Entities\OrdenMedicamento.cs" />
-    <Compile Include="Entities\OrdenProcedimiento.cs" />
-    <Compile Include="Entities\Paciente.cs" />
-    <Compile Include="Entities\Procedimiento.cs" />
-    <Compile Include="Entities\SeguroMedico.cs" />
-    <Compile Include="Entities\Usuario.cs" />
+    <Compile Include="Infrastructure\Data\AyudaDiagnosticaDAL.cs" />
+    <Compile Include="Infrastructure\Data\ConexionDB.cs" />
+    <Compile Include="Infrastructure\Data\FacturacionDAL.cs" />
+    <Compile Include="Infrastructure\Data\MedicamentoDAL.cs" />
+    <Compile Include="Infrastructure\Data\OrdenAyudaDiagnosticaDAL.cs" />
+    <Compile Include="Infrastructure\Data\OrdenDAL.cs" />
+    <Compile Include="Infrastructure\Data\OrdenMedicamentoDAL.cs" />
+    <Compile Include="Infrastructure\Data\OrdenProcedimientoDAL.cs" />
+    <Compile Include="Infrastructure\Data\PacienteDAL.cs" />
+    <Compile Include="Infrastructure\Data\ProcedimientoDAL.cs" />
+    <Compile Include="Infrastructure\Data\UsuarioDAL.cs" />
+    <Compile Include="Domain\Entities\AyudaDiagnostica.cs" />
+    <Compile Include="Domain\Entities\ContactoEmergencia.cs" />
+    <Compile Include="Domain\Entities\Facturacion.cs" />
+    <Compile Include="Domain\Entities\Medicamento.cs" />
+    <Compile Include="Domain\Entities\Orden.cs" />
+    <Compile Include="Domain\Entities\OrdenAyudaDiagnostica.cs" />
+    <Compile Include="Domain\Entities\OrdenMedicamento.cs" />
+    <Compile Include="Domain\Entities\OrdenProcedimiento.cs" />
+    <Compile Include="Domain\Entities\Paciente.cs" />
+    <Compile Include="Domain\Entities\Procedimiento.cs" />
+    <Compile Include="Domain\Entities\SeguroMedico.cs" />
+    <Compile Include="Domain\Entities\Usuario.cs" />
+    <Compile Include="Domain\Interfaces\IAyudaDiagnosticaRepository.cs" />
+    <Compile Include="Domain\Interfaces\IFacturacionRepository.cs" />
+    <Compile Include="Domain\Interfaces\IMedicamentoRepository.cs" />
+    <Compile Include="Domain\Interfaces\IOrdenAyudaDiagnosticaRepository.cs" />
+    <Compile Include="Domain\Interfaces\IOrdenMedicamentoRepository.cs" />
+    <Compile Include="Domain\Interfaces\IOrdenProcedimientoRepository.cs" />
+    <Compile Include="Domain\Interfaces\IOrdenRepository.cs" />
+    <Compile Include="Domain\Interfaces\IPacienteRepository.cs" />
+    <Compile Include="Domain\Interfaces\IProcedimientoRepository.cs" />
+    <Compile Include="Domain\Interfaces\IUsuarioRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\AyudaDiagnosticaForm.cs">
@@ -163,6 +174,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="UI\AyudaDiagnosticaForm.resx">
       <DependentUpon>AyudaDiagnosticaForm.cs</DependentUpon>
@@ -213,6 +225,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Application\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
