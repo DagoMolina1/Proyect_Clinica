@@ -1,28 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 using System.Windows.Forms;
-
-using ClinicaIPS_U.Business;
-using ClinicaIPS_U.Entities;
+using ClinicaIPS_U.Domain.Entities;
+using ClinicaIPS_U.Domain.Services;
 
 namespace ClinicaIPS_U.UI {
     public partial class AyudaDiagnosticaForm : Form {
+        private readonly AyudaDiagnosticaService _ayudaService;
 
-        private AyudaDiagnosticaBL ayudaBL = new AyudaDiagnosticaBL();
-
-        public AyudaDiagnosticaForm() {
+        public AyudaDiagnosticaForm(AyudaDiagnosticaService ayudaService) {
             InitializeComponent();
+            _ayudaService = ayudaService;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e) {
             try {
-                if (string.IsNullOrEmpty(txtNombre.Text)) {
+                if (string.IsNullOrWhiteSpace(txtNombre.Text)) {
                     MessageBox.Show("El nombre es obligatorio");
                     return;
                 }
@@ -37,7 +29,7 @@ namespace ClinicaIPS_U.UI {
                     Costo = costo
                 };
 
-                ayudaBL.RegistrarAyuda(nueva);
+                _ayudaService.Registrar(nueva);
                 MessageBox.Show("Ayuda diagnóstica registrada correctamente");
             } catch (Exception ex) {
                 MessageBox.Show($"Error: {ex.Message}");
@@ -50,8 +42,7 @@ namespace ClinicaIPS_U.UI {
                 return;
             }
 
-            var ayudas = ayudaBL.ObtenerAyudas();
-            var ayuda = ayudas.FirstOrDefault(a => a.IdAyuda == id);
+            var ayuda = _ayudaService.BuscarPorId(id);
 
             if (ayuda != null) {
                 txtNombre.Text = ayuda.Nombre;
@@ -79,7 +70,7 @@ namespace ClinicaIPS_U.UI {
                     Costo = costo
                 };
 
-                ayudaBL.ActualizarAyuda(ayuda);
+                _ayudaService.Actualizar(ayuda);
                 MessageBox.Show("Ayuda diagnóstica actualizada correctamente");
             } catch (Exception ex) {
                 MessageBox.Show($"Error: {ex.Message}");
@@ -93,10 +84,8 @@ namespace ClinicaIPS_U.UI {
                     return;
                 }
 
-                ayudaBL.EliminarAyuda(id);
+                _ayudaService.Eliminar(id);
                 MessageBox.Show("Ayuda diagnóstica eliminada correctamente");
-
-                // Limpiar campos
                 txtNombre.Clear();
                 txtCosto.Clear();
             } catch (Exception ex) {

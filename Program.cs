@@ -1,8 +1,6 @@
-﻿using ClinicaIPS_U.UI;
+using ClinicaIPS_U.Infrastructure.Configuration;
+using ClinicaIPS_U.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ClinicaIPS_U
@@ -17,7 +15,9 @@ namespace ClinicaIPS_U
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UI.LoginForm());
+
+            var services = new AppServiceProvider();
+            Application.Run(new LoginForm(services));
         }
     }
 }

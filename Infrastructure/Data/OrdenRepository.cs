@@ -1,11 +1,8 @@
-﻿using ClinicaIPS_U.Domain.Entities;
-using ClinicaIPS_U.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ClinicaIPS_U.Domain.Entities;
+using ClinicaIPS_U.Domain.Interfaces;
 
 namespace ClinicaIPS_U.Infrastructure.Data {
     public class OrdenRepository : IOrdenRepository {
@@ -14,7 +11,7 @@ namespace ClinicaIPS_U.Infrastructure.Data {
         public void Add(Orden orden) {
             using (var conn = conexion.GetConexion()) {
                 conn.Open();
-                string query = @"INSERT INTO Ordenes (idOrden, fechaCreacion, idPaciente, idMedico) 
+                string query = @"INSERT INTO Ordenes (idOrden, fechaCreacion, idPaciente, idMedico)
                                  VALUES (@idOrden, @fecha, @idPaciente, @idMedico)";
                 using (var cmd = new SqlCommand(query, conn)) {
                     cmd.Parameters.AddWithValue("@idOrden", orden.IdOrden);
@@ -60,12 +57,7 @@ namespace ClinicaIPS_U.Infrastructure.Data {
                     cmd.Parameters.AddWithValue("@idOrden", idOrden);
                     using (var reader = cmd.ExecuteReader()) {
                         if (reader.Read()) {
-                            return new Orden {
-                                IdOrden = (int)reader["idOrden"],
-                                FechaCreacion = (DateTime)reader["fechaCreacion"],
-                                IdPaciente = (int)reader["idPaciente"],
-                                IdMedico = (int)reader["idMedico"]
-                            };
+                            return Mapear(reader);
                         }
                     }
                 }
@@ -81,17 +73,38 @@ namespace ClinicaIPS_U.Infrastructure.Data {
                 using (var cmd = new SqlCommand(query, conn)) {
                     using (var reader = cmd.ExecuteReader()) {
                         while (reader.Read()) {
-                            lista.Add(new Orden {
-                                IdOrden = (int)reader["idOrden"],
-                                FechaCreacion = (DateTime)reader["fechaCreacion"],
-                                IdPaciente = (int)reader["idPaciente"],
-                                IdMedico = (int)reader["idMedico"]
-                            });
+                            lista.Add(Mapear(reader));
                         }
                     }
                 }
             }
             return lista;
+        }
+
+        public List<Orden> GetByPaciente(int idPaciente) {
+            var lista = new List<Orden>();
+            using (var conn = conexion.GetConexion()) {
+                conn.Open();
+                string query = "SELECT * FROM Ordenes WHERE idPaciente=@idPaciente";
+                using (var cmd = new SqlCommand(query, conn)) {
+                    cmd.Parameters.AddWithValue("@idPaciente", idPaciente);
+                    using (var reader = cmd.ExecuteReader()) {
+                        while (reader.Read()) {
+                            lista.Add(Mapear(reader));
+                        }
+                    }
+                }
+            }
+            return lista;
+        }
+
+        private static Orden Mapear(SqlDataReader reader) {
+            return new Orden {
+                IdOrden = (int)reader["idOrden"],
+                FechaCreacion = (DateTime)reader["fechaCreacion"],
+                IdPaciente = (int)reader["idPaciente"],
+                IdMedico = (int)reader["idMedico"]
+            };
         }
     }
 }

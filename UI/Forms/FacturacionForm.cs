@@ -1,115 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+using System;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using ClinicaIPS_U.Business;
-using ClinicaIPS_U.Entities;
-
+using ClinicaIPS_U.Domain.Services;
+using ClinicaIPS_U.Infrastructure.Configuration;
 
 namespace ClinicaIPS_U.UI {
     public partial class FacturacionForm : Form {
+        private readonly AppServiceProvider _services;
 
-        private FacturacionBL facturacionBL = new FacturacionBL();
-
-        public FacturacionForm() {
+        public FacturacionForm(AppServiceProvider services) {
             InitializeComponent();
+            _services = services;
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e) {
+        private void btnGenerar_Click(object sender, EventArgs e) {
             try {
-                if (!int.TryParse(txtIdPaciente.Text, out int idPaciente) ||
-                    !int.TryParse(txtIdMedico.Text, out int idMedico)) {
-                    MessageBox.Show("Debe ingresar un Id válido para Paciente y Médico");
+                if (!int.TryParse(txtIdOrden.Text, out int idOrden)) {
+                    MessageBox.Show("Debe ingresar un número de orden válido");
                     return;
                 }
 
-                decimal totalServicios = decimal.Parse(txtTotal.Text); // supongamos que viene de la UI
-                bool polizaActiva = !string.IsNullOrEmpty(txtIdSeguro.Text);
-                decimal copagosAcumulados = 0; // aquí podrías calcular lo acumulado del paciente
+                bool registrar = chkRegistrar.Checked;
+                var detalle = _services.Facturacion.GenerarFactura(idOrden, registrar);
 
-                Facturacion factura = new Facturacion {
-                    IdPaciente = idPaciente,
-                    IdMedico = idMedico,
-                    IdSeguro = string.IsNullOrEmpty(txtIdSeguro.Text) ? (int?)null : int.Parse(txtIdSeguro.Text)
-                };
+                txtPaciente.Text = detalle.NombrePaciente;
+                txtCedula.Text = detalle.CedulaPaciente;
+                txtEdad.Text = detalle.EdadPaciente.ToString();
+                txtMedico.Text = detalle.NombreMedicoTratante;
+                txtAseguradora.Text = detalle.NombreAseguradora;
+                txtPoliza.Text = detalle.NumeroPoliza;
+                txtEstadoPoliza.Text = detalle.PolizaActiva ? "Activa" : "Inactiva";
+                txtDiasVigencia.Text = detalle.DiasVigencia.ToString();
+                txtFechaFin.Text = detalle.FechaFinPoliza.ToShortDateString();
+                txtCopago.Text = detalle.Copago.ToString("N0");
+                txtTotalServicios.Text = detalle.TotalServicios.ToString("N0");
+                txtValorPaciente.Text = detalle.ValorPaciente.ToString("N0");
+                txtValorAseguradora.Text = detalle.ValorCoberturaAseguradora.ToString("N0");
 
-                facturacionBL.GenerarFactura(factura, totalServicios, polizaActiva, copagosAcumulados);
-
-                MessageBox.Show("Factura generada correctamente");
-            } catch (Exception ex) {
-                MessageBox.Show($"Error: {ex.Message}");
-            }
-        }
-
-        private void btnBuscar_Click(object sender, EventArgs e)  {
-            if (!int.TryParse(txtIdFactura.Text, out int id)) {
-                MessageBox.Show("Ingrese un ID válido");
-                return;
-            }
-
-            var facturas = facturacionBL.ObtenerFacturas();
-            var factura = facturas.FirstOrDefault(f => f.IdFactura == id);
-
-            if (factura != null) {
-                dtpFecha.Value = factura.Fecha;
-                txtCopago.Text = factura.Copago.ToString();
-                txtTotal.Text = factura.Total.ToString();
-                txtIdPaciente.Text = factura.IdPaciente.ToString();
-                txtIdMedico.Text = factura.IdMedico.ToString();
-                txtIdSeguro.Text = factura.IdSeguro?.ToString() ?? "";
-            } else {
-                MessageBox.Show("Factura no encontrada");
-            }
-        }
-
-        private void btnModificar_Click(object sender, EventArgs e) {
-            try {
-                if (!int.TryParse(txtIdFactura.Text, out int id)) {
-                    MessageBox.Show("Ingrese un ID válido para modificar");
-                    return;
+                lstDetalle.Items.Clear();
+                foreach (var med in detalle.Medicamentos) {
+                    lstDetalle.Items.Add($"Medicamento #{med.NumeroItem}: {med.NombreMedicamento} x{med.Cantidad} - {med.Subtotal:C}");
+                }
+                foreach (var proc in detalle.Procedimientos) {
+                    lstDetalle.Items.Add($"Procedimiento #{proc.NumeroItem}: {proc.NombreProcedimiento} ({proc.Veces} veces) - {proc.Subtotal:C}");
+                }
+                foreach (var ayuda in detalle.AyudasDiagnosticas) {
+                    lstDetalle.Items.Add($"Ayuda #{ayuda.NumeroItem}: {ayuda.NombreAyuda} x{ayuda.Cantidad} - {ayuda.Subtotal:C}");
                 }
 
-                Facturacion factura = new Facturacion {
-                    IdFactura = id,
-                    Fecha = dtpFecha.Value,
-                    Copago = decimal.Parse(txtCopago.Text),
-                    Total = decimal.Parse(txtTotal.Text),
-                    IdPaciente = int.Parse(txtIdPaciente.Text),
-                    IdMedico = int.Parse(txtIdMedico.Text),
-                    IdSeguro = string.IsNullOrEmpty(txtIdSeguro.Text) ? (int?)null : int.Parse(txtIdSeguro.Text)
-                };
-
-                facturacionBL.ActualizarFactura(factura);
-                MessageBox.Show("Factura actualizada correctamente");
+                MessageBox.Show(registrar
+                    ? "Factura generada y registrada correctamente"
+                    : "Factura generada correctamente (sin registrar)");
             } catch (Exception ex) {
-                MessageBox.Show($"Error: {ex.Message}");
-            }
-        }
-
-        private void btnEliminar_Click(object sender, EventArgs e) {
-            try {
-                if (!int.TryParse(txtIdFactura.Text, out int id)) {
-                    MessageBox.Show("Ingrese un ID válido para eliminar");
-                    return;
-                }
-
-                facturacionBL.EliminarFactura(id);
-                MessageBox.Show("Factura eliminada correctamente");
-
-                // Limpiar campos
-                txtCopago.Clear();
-                txtTotal.Clear();
-                txtIdPaciente.Clear();
-                txtIdMedico.Clear();
-                txtIdSeguro.Clear();
-            } catch (Exception ex) {
-                MessageBox.Show($"Error: {ex.Message}");
+                MessageBox.Show($"Error al generar la factura: {ex.Message}");
             }
         }
     }

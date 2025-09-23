@@ -65,6 +65,22 @@ namespace ClinicaIPS_U.Infrastructure.Data {
             }
         }
 
+        public Usuario GetById(int idUsuario) {
+            using (var conn = conexion.GetConexion()) {
+                conn.Open();
+                string query = "SELECT * FROM Usuarios WHERE idUsuario=@id";
+                using (var cmd = new SqlCommand(query, conn)) {
+                    cmd.Parameters.AddWithValue("@id", idUsuario);
+                    using (var reader = cmd.ExecuteReader()) {
+                        if (reader.Read()) {
+                            return MapearUsuario(reader);
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
         public Usuario GetByCedula(string cedula) {
             using (var conn = conexion.GetConexion()) {
                 conn.Open();
@@ -73,18 +89,7 @@ namespace ClinicaIPS_U.Infrastructure.Data {
                     cmd.Parameters.AddWithValue("@cedula", cedula);
                     using (var reader = cmd.ExecuteReader()) {
                         if (reader.Read()) {
-                            return new Usuario {
-                                IdUsuario = (int)reader["idUsuario"],
-                                NombreCompleto = reader["nombreCompleto"].ToString(),
-                                Cedula = new DocumentoIdentidad(reader["cedula"].ToString()),
-                                Correo = new Email(reader["correo"].ToString()),
-                                Telefono = new Telefono(reader["telefono"].ToString()),
-                                FechaNacimiento = (DateTime)reader["fechaNacimiento"],
-                                Direccion = new Direccion(reader["direccion"].ToString()),
-                                Rol = reader["rol"].ToString(),
-                                UsuarioLogin = reader["usuarioLogin"].ToString(),
-                                Contraseña = reader["contraseña"].ToString()
-                            };
+                            return MapearUsuario(reader);
                         }
                     }
                 }
@@ -101,18 +106,7 @@ namespace ClinicaIPS_U.Infrastructure.Data {
                     cmd.Parameters.AddWithValue("@contraseña", contraseña);
                     using (var reader = cmd.ExecuteReader()) {
                         if (reader.Read()) {
-                            return new Usuario {
-                                IdUsuario = (int)reader["idUsuario"],
-                                NombreCompleto = reader["nombreCompleto"].ToString(),
-                                Cedula = new DocumentoIdentidad(reader["cedula"].ToString()),
-                                Correo = new Email(reader["correo"].ToString()),
-                                Telefono = new Telefono(reader["telefono"].ToString()),
-                                FechaNacimiento = (DateTime)reader["fechaNacimiento"],
-                                Direccion = new Direccion(reader["direccion"].ToString()),
-                                Rol = reader["rol"].ToString(),
-                                UsuarioLogin = reader["usuarioLogin"].ToString(),
-                                Contraseña = reader["contraseña"].ToString()
-                            };
+                            return MapearUsuario(reader);
                         }
                     }
                 }
@@ -128,23 +122,27 @@ namespace ClinicaIPS_U.Infrastructure.Data {
                 using (var cmd = new SqlCommand(query, conn)) {
                     using (var reader = cmd.ExecuteReader()) {
                         while (reader.Read()) {
-                            lista.Add(new Usuario {
-                                IdUsuario = (int)reader["idUsuario"],
-                                NombreCompleto = reader["nombreCompleto"].ToString(),
-                                Cedula = new DocumentoIdentidad(reader["cedula"].ToString()),
-                                Correo = new Email(reader["correo"].ToString()),
-                                Telefono = new Telefono(reader["telefono"].ToString()),
-                                FechaNacimiento = (DateTime)reader["fechaNacimiento"],
-                                Direccion = new Direccion(reader["direccion"].ToString()),
-                                Rol = reader["rol"].ToString(),
-                                UsuarioLogin = reader["usuarioLogin"].ToString(),
-                                Contraseña = reader["contraseña"].ToString()
-                            });
+                            lista.Add(MapearUsuario(reader));
                         }
                     }
                 }
             }
             return lista;
         }
+        private static Usuario MapearUsuario(SqlDataReader reader) {
+            return new Usuario {
+                IdUsuario = (int)reader["idUsuario"],
+                NombreCompleto = reader["nombreCompleto"].ToString(),
+                Cedula = new DocumentoIdentidad(reader["cedula"].ToString()),
+                Correo = new Email(reader["correo"].ToString()),
+                Telefono = new Telefono(reader["telefono"].ToString()),
+                FechaNacimiento = (DateTime)reader["fechaNacimiento"],
+                Direccion = new Direccion(reader["direccion"].ToString()),
+                Rol = reader["rol"].ToString(),
+                UsuarioLogin = reader["usuarioLogin"].ToString(),
+                Contraseña = reader["contraseña"].ToString()
+            };
+        }
+
     }
 }

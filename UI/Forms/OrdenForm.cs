@@ -1,44 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using ClinicaIPS_U.Business;
-using ClinicaIPS_U.Entities;
+using ClinicaIPS_U.Domain.Entities;
+using ClinicaIPS_U.Domain.Services;
 
 namespace ClinicaIPS_U.UI {
     public partial class OrdenForm : Form {
+        private readonly OrdenService _ordenService;
 
-        private OrdenBL ordenBL = new OrdenBL();
-
-        public OrdenForm() {
+        public OrdenForm(OrdenService ordenService) {
             InitializeComponent();
+            _ordenService = ordenService;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e) {
             try {
-                if (!int.TryParse(txtIdPaciente.Text, out int idPaciente)) {
-                    MessageBox.Show("Debe ingresar un Id de paciente válido");
+                if (!int.TryParse(txtIdOrden.Text, out int idOrden)) {
+                    MessageBox.Show("Debe ingresar un número de orden válido (máximo 6 dígitos)");
                     return;
                 }
 
-                if (!int.TryParse(txtIdMedico.Text, out int idMedico)) {
-                    MessageBox.Show("Debe ingresar un Id de médico válido");
+                if (!int.TryParse(txtIdPaciente.Text, out int idPaciente) ||
+                    !int.TryParse(txtIdMedico.Text, out int idMedico)) {
+                    MessageBox.Show("Debe ingresar Id válidos para paciente y médico");
                     return;
                 }
 
                 Orden nueva = new Orden {
+                    IdOrden = idOrden,
                     IdPaciente = idPaciente,
                     IdMedico = idMedico,
                     FechaCreacion = DateTime.Now
                 };
 
-                ordenBL.RegistrarOrden(nueva);
+                _ordenService.RegistrarOrden(nueva);
                 MessageBox.Show("Orden registrada correctamente");
             } catch (Exception ex) {
                 MessageBox.Show($"Error: {ex.Message}");
@@ -51,8 +46,7 @@ namespace ClinicaIPS_U.UI {
                 return;
             }
 
-            var ordenes = ordenBL.ObtenerOrdenes();
-            var orden = ordenes.FirstOrDefault(o => o.IdOrden == id);
+            var orden = _ordenService.BuscarOrden(id);
 
             if (orden != null) {
                 dtpFecha.Value = orden.FechaCreacion;
@@ -83,7 +77,7 @@ namespace ClinicaIPS_U.UI {
                     IdMedico = idMedico
                 };
 
-                ordenBL.ActualizarOrden(orden);
+                _ordenService.ActualizarOrden(orden);
                 MessageBox.Show("Orden actualizada correctamente");
             } catch (Exception ex) {
                 MessageBox.Show($"Error: {ex.Message}");
@@ -97,10 +91,8 @@ namespace ClinicaIPS_U.UI {
                     return;
                 }
 
-                ordenBL.EliminarOrden(id);
+                _ordenService.EliminarOrden(id);
                 MessageBox.Show("Orden eliminada correctamente");
-
-                // Limpiar campos
                 txtIdPaciente.Clear();
                 txtIdMedico.Clear();
             } catch (Exception ex) {

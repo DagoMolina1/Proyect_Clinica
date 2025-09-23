@@ -1,28 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using ClinicaIPS_U.Business;
-using ClinicaIPS_U.Entities;
-using ClinicaIPS_U.Validations;
+using ClinicaIPS_U.Domain.Entities;
+using ClinicaIPS_U.Domain.Services;
 
 namespace ClinicaIPS_U.UI {
-    public partial class MedicamentoForm: Form {
+    public partial class MedicamentoForm : Form {
+        private readonly MedicamentoService _medicamentoService;
 
-        private MedicamentoBL medicamentoBL = new MedicamentoBL();
-        public MedicamentoForm() {
+        public MedicamentoForm(MedicamentoService medicamentoService) {
             InitializeComponent();
+            _medicamentoService = medicamentoService;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e) {
             try {
-                if (string.IsNullOrEmpty(txtNombre.Text)) {
+                if (string.IsNullOrWhiteSpace(txtNombre.Text)) {
                     MessageBox.Show("El nombre del medicamento es obligatorio");
                     return;
                 }
@@ -32,13 +25,13 @@ namespace ClinicaIPS_U.UI {
                     return;
                 }
 
-                Medicamento nuevo = new Medicamento {
+                var nuevo = new Medicamento {
                     Nombre = txtNombre.Text,
                     Dosis = txtDosis.Text,
                     Costo = costo
                 };
 
-                medicamentoBL.RegistrarMedicamento(nuevo);
+                _medicamentoService.Registrar(nuevo);
                 MessageBox.Show("Medicamento registrado correctamente");
             } catch (Exception ex) {
                 MessageBox.Show($"Error: {ex.Message}");
@@ -51,15 +44,14 @@ namespace ClinicaIPS_U.UI {
                 return;
             }
 
-            var medicamentos = medicamentoBL.ObtenerMedicamentos();
-            var medicamento = medicamentos.FirstOrDefault(m => m.IdMedicamento == id);
+            var medicamento = _medicamentoService.BuscarPorId(id);
 
             if (medicamento != null) {
                 txtNombre.Text = medicamento.Nombre;
                 txtDosis.Text = medicamento.Dosis;
                 txtCosto.Text = medicamento.Costo.ToString();
             } else {
-                MessageBox.Show("❌ Medicamento no encontrado");
+                MessageBox.Show("Medicamento no encontrado");
             }
         }
 
@@ -75,14 +67,14 @@ namespace ClinicaIPS_U.UI {
                     return;
                 }
 
-                Medicamento medicamento = new Medicamento {
+                var medicamento = new Medicamento {
                     IdMedicamento = id,
                     Nombre = txtNombre.Text,
                     Dosis = txtDosis.Text,
                     Costo = costo
                 };
 
-                medicamentoBL.ActualizarMedicamento(medicamento);
+                _medicamentoService.Actualizar(medicamento);
                 MessageBox.Show("Medicamento actualizado correctamente");
             } catch (Exception ex) {
                 MessageBox.Show($"Error: {ex.Message}");
@@ -96,10 +88,8 @@ namespace ClinicaIPS_U.UI {
                     return;
                 }
 
-                medicamentoBL.EliminarMedicamento(id);
+                _medicamentoService.Eliminar(id);
                 MessageBox.Show("Medicamento eliminado correctamente");
-
-                // Limpiar campos
                 txtNombre.Clear();
                 txtDosis.Clear();
                 txtCosto.Clear();

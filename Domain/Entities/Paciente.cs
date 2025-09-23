@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using System;
 using ClinicaIPS_U.Domain.ValueObjects;
 
 namespace ClinicaIPS_U.Domain.Entities {
@@ -16,5 +11,9 @@ namespace ClinicaIPS_U.Domain.Entities {
         public Direccion Direccion { get; set; }
         public Telefono Telefono { get; set; }
         public Email Correo { get; set; }
+        public string UsuarioPortal { get; set; }
+        public string ContrasenaPortal { get; set; }
+        public ContactoEmergencia ContactoEmergencia { get; set; }
+        public SeguroMedico SeguroMedico { get; set; }
     }
 }

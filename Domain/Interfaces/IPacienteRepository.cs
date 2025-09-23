@@ -1,9 +1,4 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using ClinicaIPS_U.Domain.Entities;
 
 namespace ClinicaIPS_U.Domain.Interfaces {
@@ -12,6 +7,7 @@ namespace ClinicaIPS_U.Domain.Interfaces {
         void Update(Paciente paciente);
         void Delete(string cedula);
         Paciente GetByCedula(string cedula);
+        Paciente GetById(int idPaciente);
         List<Paciente> GetAll();
     }
 }
