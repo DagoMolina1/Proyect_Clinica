@@ -1,0 +1,89 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\julia\\OneDrive\\Desktop\\Proyect_Clinica\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{915C0C34-9AC9-4276-974E-E704C2422D23}|ClinicaIPS_U.csproj|c:\\users\\julia\\onedrive\\desktop\\proyect_clinica\\ui\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{915C0C34-9AC9-4276-974E-E704C2422D23}|ClinicaIPS_U.csproj|solutionrelative:ui\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{915C0C34-9AC9-4276-974E-E704C2422D23}|ClinicaIPS_U.csproj|c:\\users\\julia\\onedrive\\desktop\\proyect_clinica\\ui\\forms\\pacienteform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{915C0C34-9AC9-4276-974E-E704C2422D23}|ClinicaIPS_U.csproj|solutionrelative:ui\\forms\\pacienteform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{915C0C34-9AC9-4276-974E-E704C2422D23}|ClinicaIPS_U.csproj|c:\\users\\julia\\onedrive\\desktop\\proyect_clinica\\ui\\forms\\ayudadiagnosticaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{915C0C34-9AC9-4276-974E-E704C2422D23}|ClinicaIPS_U.csproj|solutionrelative:ui\\forms\\ayudadiagnosticaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{915C0C34-9AC9-4276-974E-E704C2422D23}|ClinicaIPS_U.csproj|c:\\users\\julia\\onedrive\\desktop\\proyect_clinica\\validations\\validador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{915C0C34-9AC9-4276-974E-E704C2422D23}|ClinicaIPS_U.csproj|solutionrelative:validations\\validador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LoginForm.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\julia\\OneDrive\\Desktop\\Proyect_Clinica\\UI\\Forms\\LoginForm.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\LoginForm.cs",
+              "ToolTip": "C:\\Users\\julia\\OneDrive\\Desktop\\Proyect_Clinica\\UI\\Forms\\LoginForm.cs [Dise\u00F1o]",
+              "RelativeToolTip": "UI\\Forms\\LoginForm.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T01:52:00.999Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PacienteForm.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\julia\\OneDrive\\Desktop\\Proyect_Clinica\\UI\\Forms\\PacienteForm.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\PacienteForm.cs",
+              "ToolTip": "C:\\Users\\julia\\OneDrive\\Desktop\\Proyect_Clinica\\UI\\Forms\\PacienteForm.cs [Dise\u00F1o]",
+              "RelativeToolTip": "UI\\Forms\\PacienteForm.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T01:51:58.377Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AyudaDiagnosticaForm.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\julia\\OneDrive\\Desktop\\Proyect_Clinica\\UI\\Forms\\AyudaDiagnosticaForm.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\AyudaDiagnosticaForm.cs",
+              "ToolTip": "C:\\Users\\julia\\OneDrive\\Desktop\\Proyect_Clinica\\UI\\Forms\\AyudaDiagnosticaForm.cs [Dise\u00F1o]",
+              "RelativeToolTip": "UI\\Forms\\AyudaDiagnosticaForm.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T01:50:48.006Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Validador.cs",
+              "DocumentMoniker": "C:\\Users\\julia\\OneDrive\\Desktop\\Proyect_Clinica\\Validations\\Validador.cs",
+              "RelativeDocumentMoniker": "Validations\\Validador.cs",
+              "ToolTip": "C:\\Users\\julia\\OneDrive\\Desktop\\Proyect_Clinica\\Validations\\Validador.cs",
+              "RelativeToolTip": "Validations\\Validador.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-20T16:08:58.646Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

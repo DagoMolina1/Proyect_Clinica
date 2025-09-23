@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 using ClinicaIPS_U.Domain.Entities;
 
-namespace ClinicaIPS_U.Domain.Interfaces
-{
-    internal class IOrdenRepository
-    {
+namespace ClinicaIPS_U.Domain.Interfaces {
+    public interface IOrdenRepository {
         void Add(Orden orden);
         void Update(Orden orden);
         void Delete(int idOrden);

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 using ClinicaIPS_U.Domain.Entities;
 
-namespace ClinicaIPS_U.Domain.Interfaces
-{
-    internal class IAyudaDiagnosticaRepository
-    {
+namespace ClinicaIPS_U.Domain.Interfaces {
+    public interface IAyudaDiagnosticaRepository {
         void Add(AyudaDiagnostica ayuda);
         void Update(AyudaDiagnostica ayuda);
         void Delete(int idAyuda);

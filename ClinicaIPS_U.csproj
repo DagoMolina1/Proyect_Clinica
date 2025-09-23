@@ -47,6 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Services\AyudaDiagnosticaService.cs" />
+    <Compile Include="Application\Services\FacturacionService.cs" />
+    <Compile Include="Application\Services\MedicamentoService.cs" />
+    <Compile Include="Application\Services\OrdenService.cs" />
+    <Compile Include="Application\Services\PacienteService.cs" />
+    <Compile Include="Application\Services\ProcedimientoService.cs" />
+    <Compile Include="Application\Services\UsuarioService.cs" />
     <Compile Include="Business\AyudaDiagnosticaBL.cs" />
     <Compile Include="Business\FacturacionBL.cs" />
     <Compile Include="Business\LoginBL.cs" />
@@ -58,17 +65,12 @@
     <Compile Include="Business\PacienteBL.cs" />
     <Compile Include="Business\ProcedimientoBL.cs" />
     <Compile Include="Business\UsuarioBL.cs" />
-    <Compile Include="Infrastructure\Data\AyudaDiagnosticaDAL.cs" />
+    <Compile Include="Domain\ValueObjects\Direccion.cs" />
+    <Compile Include="Domain\ValueObjects\DocumentoIdentidad.cs" />
+    <Compile Include="Domain\ValueObjects\Email.cs" />
+    <Compile Include="Domain\ValueObjects\Telefono.cs" />
+    <Compile Include="Infrastructure\Data\AyudaDiagnosticaRepository.cs" />
     <Compile Include="Infrastructure\Data\ConexionDB.cs" />
-    <Compile Include="Infrastructure\Data\FacturacionDAL.cs" />
-    <Compile Include="Infrastructure\Data\MedicamentoDAL.cs" />
-    <Compile Include="Infrastructure\Data\OrdenAyudaDiagnosticaDAL.cs" />
-    <Compile Include="Infrastructure\Data\OrdenDAL.cs" />
-    <Compile Include="Infrastructure\Data\OrdenMedicamentoDAL.cs" />
-    <Compile Include="Infrastructure\Data\OrdenProcedimientoDAL.cs" />
-    <Compile Include="Infrastructure\Data\PacienteDAL.cs" />
-    <Compile Include="Infrastructure\Data\ProcedimientoDAL.cs" />
-    <Compile Include="Infrastructure\Data\UsuarioDAL.cs" />
     <Compile Include="Domain\Entities\AyudaDiagnostica.cs" />
     <Compile Include="Domain\Entities\ContactoEmergencia.cs" />
     <Compile Include="Domain\Entities\Facturacion.cs" />
@@ -91,78 +93,87 @@
     <Compile Include="Domain\Interfaces\IPacienteRepository.cs" />
     <Compile Include="Domain\Interfaces\IProcedimientoRepository.cs" />
     <Compile Include="Domain\Interfaces\IUsuarioRepository.cs" />
+    <Compile Include="Infrastructure\Data\FacturacionRepository.cs" />
+    <Compile Include="Infrastructure\Data\MedicamentoRepository.cs" />
+    <Compile Include="Infrastructure\Data\OrdenAyudaDiagnosticaRepository.cs" />
+    <Compile Include="Infrastructure\Data\OrdenMedicamentoRepository.cs" />
+    <Compile Include="Infrastructure\Data\OrdenProcedimientoRepository.cs" />
+    <Compile Include="Infrastructure\Data\OrdenRepository.cs" />
+    <Compile Include="Infrastructure\Data\PacienteRepository.cs" />
+    <Compile Include="Infrastructure\Data\ProcedimientoRepository.cs" />
+    <Compile Include="Infrastructure\Data\UsuarioRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\AyudaDiagnosticaForm.cs">
+    <Compile Include="UI\Forms\AyudaDiagnosticaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\AyudaDiagnosticaForm.Designer.cs">
+    <Compile Include="UI\Forms\AyudaDiagnosticaForm.Designer.cs">
       <DependentUpon>AyudaDiagnosticaForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\FacturacionForm.cs">
+    <Compile Include="UI\Forms\FacturacionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\FacturacionForm.Designer.cs">
+    <Compile Include="UI\Forms\FacturacionForm.Designer.cs">
       <DependentUpon>FacturacionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\LoginForm.cs">
+    <Compile Include="UI\Forms\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\LoginForm.Designer.cs">
+    <Compile Include="UI\Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\MedicamentoForm.cs">
+    <Compile Include="UI\Forms\MedicamentoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\MedicamentoForm.Designer.cs">
+    <Compile Include="UI\Forms\MedicamentoForm.Designer.cs">
       <DependentUpon>MedicamentoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\MenuPrincipal.cs">
+    <Compile Include="UI\Forms\MenuPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\MenuPrincipal.Designer.cs">
+    <Compile Include="UI\Forms\MenuPrincipal.Designer.cs">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\OrdenAyudaDiagnosticaForm.cs">
+    <Compile Include="UI\Forms\OrdenAyudaDiagnosticaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\OrdenAyudaDiagnosticaForm.Designer.cs">
+    <Compile Include="UI\Forms\OrdenAyudaDiagnosticaForm.Designer.cs">
       <DependentUpon>OrdenAyudaDiagnosticaForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\OrdenForm.cs">
+    <Compile Include="UI\Forms\OrdenForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\OrdenForm.Designer.cs">
+    <Compile Include="UI\Forms\OrdenForm.Designer.cs">
       <DependentUpon>OrdenForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\OrdenMedicamentoForm.cs">
+    <Compile Include="UI\Forms\OrdenMedicamentoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\OrdenMedicamentoForm.Designer.cs">
+    <Compile Include="UI\Forms\OrdenMedicamentoForm.Designer.cs">
       <DependentUpon>OrdenMedicamentoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\OrdenProcedimientoForm.cs">
+    <Compile Include="UI\Forms\OrdenProcedimientoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\OrdenProcedimientoForm.Designer.cs">
+    <Compile Include="UI\Forms\OrdenProcedimientoForm.Designer.cs">
       <DependentUpon>OrdenProcedimientoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\PacienteForm.cs">
+    <Compile Include="UI\Forms\PacienteForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\PacienteForm.Designer.cs">
+    <Compile Include="UI\Forms\PacienteForm.Designer.cs">
       <DependentUpon>PacienteForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ProcedimientoForm.cs">
+    <Compile Include="UI\Forms\ProcedimientoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\ProcedimientoForm.Designer.cs">
+    <Compile Include="UI\Forms\ProcedimientoForm.Designer.cs">
       <DependentUpon>ProcedimientoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UsuarioForm.cs">
+    <Compile Include="UI\Forms\UsuarioForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UsuarioForm.Designer.cs">
+    <Compile Include="UI\Forms\UsuarioForm.Designer.cs">
       <DependentUpon>UsuarioForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Validations\Validador.cs" />
@@ -176,40 +187,40 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UI\AyudaDiagnosticaForm.resx">
+    <EmbeddedResource Include="UI\Forms\AyudaDiagnosticaForm.resx">
       <DependentUpon>AyudaDiagnosticaForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\FacturacionForm.resx">
+    <EmbeddedResource Include="UI\Forms\FacturacionForm.resx">
       <DependentUpon>FacturacionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\LoginForm.resx">
+    <EmbeddedResource Include="UI\Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\MedicamentoForm.resx">
+    <EmbeddedResource Include="UI\Forms\MedicamentoForm.resx">
       <DependentUpon>MedicamentoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\MenuPrincipal.resx">
+    <EmbeddedResource Include="UI\Forms\MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\OrdenAyudaDiagnosticaForm.resx">
+    <EmbeddedResource Include="UI\Forms\OrdenAyudaDiagnosticaForm.resx">
       <DependentUpon>OrdenAyudaDiagnosticaForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\OrdenForm.resx">
+    <EmbeddedResource Include="UI\Forms\OrdenForm.resx">
       <DependentUpon>OrdenForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\OrdenMedicamentoForm.resx">
+    <EmbeddedResource Include="UI\Forms\OrdenMedicamentoForm.resx">
       <DependentUpon>OrdenMedicamentoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\OrdenProcedimientoForm.resx">
+    <EmbeddedResource Include="UI\Forms\OrdenProcedimientoForm.resx">
       <DependentUpon>OrdenProcedimientoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\PacienteForm.resx">
+    <EmbeddedResource Include="UI\Forms\PacienteForm.resx">
       <DependentUpon>PacienteForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ProcedimientoForm.resx">
+    <EmbeddedResource Include="UI\Forms\ProcedimientoForm.resx">
       <DependentUpon>ProcedimientoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UsuarioForm.resx">
+    <EmbeddedResource Include="UI\Forms\UsuarioForm.resx">
       <DependentUpon>UsuarioForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -225,8 +236,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Application\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

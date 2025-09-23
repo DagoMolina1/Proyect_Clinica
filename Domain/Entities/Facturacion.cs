@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClinicaIPS_U.Domain
-    .Entities {
-    class Facturacion {
+namespace ClinicaIPS_U.Domain.Entities {
+    public class Facturacion {
         public int IdFactura { get; set; }
         public DateTime Fecha { get; set; }
         public decimal Copago { get; set; }

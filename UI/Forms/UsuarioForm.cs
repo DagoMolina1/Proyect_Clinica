@@ -8,62 +8,38 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using ClinicaIPS_U.Business;
-using ClinicaIPS_U.Entities;
-using ClinicaIPS_U.Validations;
+using ClinicaIPS_U.Application.Services;
+using ClinicaIPS_U.Domain.Entities;
+using ClinicaIPS_U.Domain.ValueObjects;
 
 namespace ClinicaIPS_U.UI {
     public partial class UsuarioForm: Form {
 
-        private UsuarioBL usuarioBL = new UsuarioBL();
-        public UsuarioForm() {
+        private readonly UsuarioService _usuarioService;
+        public UsuarioForm(UsuarioService usuarioService) {
             InitializeComponent();
+            _usuarioService = usuarioService;
         }
 
         private void UsuarioForm_Load(object sender, EventArgs e) {
-            // Cargar roles disponibles en el ComboBox
-            cmbRol.Items.Add("RRHH");
-            cmbRol.Items.Add("Médico");
-            cmbRol.Items.Add("Enfermera");
-            cmbRol.Items.Add("Administrativo");
-            cmbRol.Items.Add("Soporte");
+            cmbRol.Items.AddRange(new[] { "RRHH", "Médico", "Enfermera", "Administrativo", "Soporte" });
         }
 
         private void btnGuardar_Click(object sender, EventArgs e) {
             try {
-                if (!Validador.EsCedulaValida(txtCedula.Text)) {
-                    MessageBox.Show("La cédula no es válida");
-                    return;
-                }
-
-                if (!Validador.EsCorreoValido(txtCorreo.Text)) {
-                    MessageBox.Show("El correo no es válido");
-                    return;
-                }
-
-                if (!Validador.EsTelefonoValido(txtTelefono.Text)) {
-                    MessageBox.Show("El teléfono debe tener 10 dígitos numéricos");
-                    return;
-                }
-
-                if (!Validador.EsContraseñaValida(txtContraseña.Text)) {
-                    MessageBox.Show("La contraseña no cumple con los requisitos");
-                    return;
-                }
-
-                Usuario nuevo = new Usuario {
-                    Cedula = txtCedula.Text,
+                var nuevo = new Usuario {
+                    Cedula = new DocumentoIdentidad(txtCedula.Text),
                     NombreCompleto = txtNombre.Text,
                     FechaNacimiento = dtpFechaNacimiento.Value,
-                    Direccion = txtDireccion.Text,
-                    Telefono = txtTelefono.Text,
-                    Correo = txtCorreo.Text,
+                    Direccion = new Direccion(txtDireccion.Text),
+                    Telefono = new Telefono(txtTelefono.Text),
+                    Correo = new Email(txtCorreo.Text),
                     Rol = cmbRol.Text,
                     UsuarioLogin = txtUsuarioLogin.Text,
                     Contraseña = txtContraseña.Text
                 };
 
-                usuarioBL.RegistrarUsuario(nuevo);
+                _usuarioService.Registrar(nuevo);
                 MessageBox.Show("Usuario registrado correctamente");
             } catch (Exception ex) {
                 MessageBox.Show($"Error: {ex.Message}");
@@ -71,17 +47,13 @@ namespace ClinicaIPS_U.UI {
         }
 
         private void btnBuscar_Click(object sender, EventArgs e) {
-            string cedula = txtCedula.Text;
-
-            var usuarios = usuarioBL.ObtenerUsuarios();
-            var usuario = usuarios.FirstOrDefault(u => u.Cedula == cedula);
-
+            var usuario = _usuarioService.BuscarPorCedula(txtCedula.Text);
             if (usuario != null) {
                 txtNombre.Text = usuario.NombreCompleto;
                 dtpFechaNacimiento.Value = usuario.FechaNacimiento;
-                txtDireccion.Text = usuario.Direccion;
-                txtTelefono.Text = usuario.Telefono;
-                txtCorreo.Text = usuario.Correo;
+                txtDireccion.Text = usuario.Direccion.ToString();
+                txtTelefono.Text = usuario.Telefono.ToString();
+                txtCorreo.Text = usuario.Correo.ToString();
                 cmbRol.Text = usuario.Rol;
                 txtUsuarioLogin.Text = usuario.UsuarioLogin;
                 txtContraseña.Text = usuario.Contraseña;
@@ -92,19 +64,19 @@ namespace ClinicaIPS_U.UI {
 
         private void btnModificar_Click(object sender, EventArgs e) {
             try {
-                Usuario usuario = new Usuario {
-                    Cedula = txtCedula.Text,
+                var usuario = new Usuario {
+                    Cedula = new DocumentoIdentidad(txtCedula.Text),
                     NombreCompleto = txtNombre.Text,
                     FechaNacimiento = dtpFechaNacimiento.Value,
-                    Direccion = txtDireccion.Text,
-                    Telefono = txtTelefono.Text,
-                    Correo = txtCorreo.Text,
+                    Direccion = new Direccion(txtDireccion.Text),
+                    Telefono = new Telefono(txtTelefono.Text),
+                    Correo = new Email(txtCorreo.Text),
                     Rol = cmbRol.Text,
                     UsuarioLogin = txtUsuarioLogin.Text,
                     Contraseña = txtContraseña.Text
                 };
 
-                usuarioBL.ActualizarUsuario(usuario);
+                _usuarioService.Actualizar(usuario);
                 MessageBox.Show("Usuario actualizado correctamente");
             } catch (Exception ex) {
                 MessageBox.Show($"Error: {ex.Message}");
@@ -113,17 +85,9 @@ namespace ClinicaIPS_U.UI {
 
         private void btnEliminar_Click(object sender, EventArgs e) {
             try {
-                string cedula = txtCedula.Text;
-
-                if (string.IsNullOrEmpty(cedula)) {
-                    MessageBox.Show("Ingrese la cédula del usuario a eliminar");
-                    return;
-                }
-
-                usuarioBL.EliminarUsuario(cedula);
+                _usuarioService.Eliminar(txtCedula.Text);
                 MessageBox.Show("Usuario eliminado correctamente");
 
-                // Limpiar campos
                 txtNombre.Clear();
                 txtDireccion.Clear();
                 txtTelefono.Clear();

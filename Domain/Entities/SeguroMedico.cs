@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClinicaIPS_U.Domain
-    .Entities {
-    class SeguroMedico {
+namespace ClinicaIPS_U.Domain.Entities {
+    public class SeguroMedico {
         public int IdSeguro { get; set; }
         public string NombreCompania { get; set; }
         public string NumeroPoliza { get; set; }

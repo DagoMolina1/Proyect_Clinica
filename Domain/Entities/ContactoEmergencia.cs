@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClinicaIPS_U.Domain
-    .Entities {
-    class ContactoEmergencia {
+namespace ClinicaIPS_U.Domain.Entities {
+    public class ContactoEmergencia {
         public int IdContacto { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }

@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 using ClinicaIPS_U.Domain.Entities;
 
-namespace ClinicaIPS_U.Domain.Interfaces
-{
-    internal class IOrdenAyudaDiagnosticaRepository
-    {
+namespace ClinicaIPS_U.Domain.Interfaces {
+    public interface IOrdenAyudaDiagnosticaRepository {
         void Add(OrdenAyudaDiagnostica ordenAyuda);
         void Update(OrdenAyudaDiagnostica ordenAyuda);
-        void Delete(int idOrden, int idAyuda);
-        OrdenAyudaDiagnostica GetById(int idOrden, int idAyuda);
+        void Delete(int idOrdenAyuda);
+        OrdenAyudaDiagnostica GetById(int idOrdenAyuda);
         List<OrdenAyudaDiagnostica> GetByOrden(int idOrden);
     }
 }

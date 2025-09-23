@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 using ClinicaIPS_U.Domain.Entities;
 
-namespace ClinicaIPS_U.Domain.Interfaces
-{
-    internal class IFacturacionRepository
-    {
-        void Add(Factura factura);
-        void Update(Factura factura);
+namespace ClinicaIPS_U.Domain.Interfaces {
+    public interface IFacturacionRepository {
+        void Add(Facturacion factura);
+        void Update(Facturacion factura);
         void Delete(int idFactura);
-        Factura GetById(int idFactura);
-        List<Factura> GetAll();
+        Facturacion GetById(int idFactura);
+        List<Facturacion> GetAll();
     }
 }

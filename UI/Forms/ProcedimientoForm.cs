@@ -8,16 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using ClinicaIPS_U.Business;
-using ClinicaIPS_U.Entities;
+using ClinicaIPS_U.Application.Services;
+using ClinicaIPS_U.Domain.Entities;
 
 namespace ClinicaIPS_U.UI {
     public partial class ProcedimientoForm: Form {
 
-        private ProcedimientoBL procedimientoBL = new ProcedimientoBL();
+        private readonly ProcedimientoService _procedimientoService;
 
-        public ProcedimientoForm() {
+        public ProcedimientoForm(ProcedimientoService procedimientoService) {
             InitializeComponent();
+            _procedimientoService = procedimientoService;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e) {
@@ -32,16 +33,16 @@ namespace ClinicaIPS_U.UI {
                     return;
                 }
 
-                Procedimiento nuevo = new Procedimiento {
+                var nuevo = new Procedimiento {
                     Nombre = txtNombre.Text,
                     Costo = costo,
                     RequiereEspecialista = chkEspecialista.Checked,
-                    IdEspecialidad = string.IsNullOrWhiteSpace(txtIdEspecialidad.Text) 
-                        ? (int?)null 
+                    IdEspecialidad = string.IsNullOrWhiteSpace(txtIdEspecialidad.Text)
+                        ? (int?)null
                         : int.Parse(txtIdEspecialidad.Text)
                 };
 
-                procedimientoBL.RegistrarProcedimiento(nuevo);
+                _procedimientoService.Registrar(nuevo);
                 MessageBox.Show("Procedimiento registrado correctamente");
             } catch (Exception ex) {
                 MessageBox.Show($"Error: {ex.Message}");
@@ -54,8 +55,7 @@ namespace ClinicaIPS_U.UI {
                 return;
             }
 
-            var procedimientos = procedimientoBL.ObtenerProcedimientos();
-            var procedimiento = procedimientos.FirstOrDefault(p => p.IdProcedimiento == id);
+            var procedimiento = _procedimientoService.BuscarPorId(id);
 
             if (procedimiento != null) {
                 txtNombre.Text = procedimiento.Nombre;
@@ -63,7 +63,7 @@ namespace ClinicaIPS_U.UI {
                 chkEspecialista.Checked = procedimiento.RequiereEspecialista;
                 txtIdEspecialidad.Text = procedimiento.IdEspecialidad?.ToString() ?? "";
             } else {
-                MessageBox.Show("❌ Procedimiento no encontrado");
+                MessageBox.Show("Procedimiento no encontrado");
             }
         }
 
@@ -79,15 +79,17 @@ namespace ClinicaIPS_U.UI {
                     return;
                 }
 
-                Procedimiento procedimiento = new Procedimiento {
+                var procedimiento = new Procedimiento {
                     IdProcedimiento = id,
                     Nombre = txtNombre.Text,
                     Costo = costo,
                     RequiereEspecialista = chkEspecialista.Checked,
-                    IdEspecialidad = string.IsNullOrWhiteSpace(txtIdEspecialidad.Text) ? (int?)null : int.Parse(txtIdEspecialidad.Text)
+                    IdEspecialidad = string.IsNullOrWhiteSpace(txtIdEspecialidad.Text)
+                        ? (int?)null
+                        : int.Parse(txtIdEspecialidad.Text)
                 };
 
-                procedimientoBL.ActualizarProcedimiento(procedimiento);
+                _procedimientoService.Actualizar(procedimiento);
                 MessageBox.Show("Procedimiento actualizado correctamente");
             } catch (Exception ex) {
                 MessageBox.Show($"Error: {ex.Message}");
@@ -101,7 +103,7 @@ namespace ClinicaIPS_U.UI {
                     return;
                 }
 
-                procedimientoBL.EliminarProcedimiento(id);
+                _procedimientoService.Eliminar(id);
                 MessageBox.Show("Procedimiento eliminado correctamente");
 
                 // Limpieza de campos
@@ -113,6 +115,5 @@ namespace ClinicaIPS_U.UI {
                 MessageBox.Show($"Error: {ex.Message}");
             }
         }
-
     }
 }

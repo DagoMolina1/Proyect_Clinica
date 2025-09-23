@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ClinicaIPS_U.Data;
-using ClinicaIPS_U.Entities;
+using ClinicaIPS_U.Domain.Entities;
 
 namespace ClinicaIPS_U.Business {
     internal class AyudaDiagnosticaBL {

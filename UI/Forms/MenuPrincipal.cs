@@ -12,28 +12,18 @@ namespace ClinicaIPS_U.UI {
     public partial class MenuPrincipal : Form {
 
         private string rolUsuario;
-
-        // Constructor vacío (por si lo usas en otros lados)
-        public MenuPrincipal()
-        {
-            InitializeComponent();
-        }
-
         // Constructor que recibe el rol
-        public MenuPrincipal(string rol)
-        {
+        public MenuPrincipal(string rol) {
             InitializeComponent();
             rolUsuario = rol;
             ConfigurarPermisos();
         }
 
-        private void ConfigurarPermisos()
-        {
-            // 🔹 Todos tienen acceso a Pacientes
+        private void ConfigurarPermisos() {
+            //Todos tienen acceso a Pacientes
             pacientesToolStripMenuItem.Enabled = true;
 
-            switch (rolUsuario)
-            {
+            switch (rolUsuario) {
                 case "Admin":
                     // Acceso completo
                     break;
