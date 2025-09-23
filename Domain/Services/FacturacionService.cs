@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using ClinicaIPS_U.Domain.Entities;
 using ClinicaIPS_U.Domain.Interfaces;
 
-namespace ClinicaIPS_U.Application.Services {
+namespace ClinicaIPS_U.Domain.Services {
     public class FacturacionService {
         private readonly IFacturacionRepository _facturacionRepository;
 
