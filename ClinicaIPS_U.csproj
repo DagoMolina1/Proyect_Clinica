@@ -47,13 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\Services\AyudaDiagnosticaService.cs" />
-    <Compile Include="Application\Services\FacturacionService.cs" />
-    <Compile Include="Application\Services\MedicamentoService.cs" />
-    <Compile Include="Application\Services\OrdenService.cs" />
-    <Compile Include="Application\Services\PacienteService.cs" />
-    <Compile Include="Application\Services\ProcedimientoService.cs" />
-    <Compile Include="Application\Services\UsuarioService.cs" />
+    <Compile Include="Domain\Services\AyudaDiagnosticaService.cs" />
+    <Compile Include="Domain\Services\FacturacionService.cs" />
+    <Compile Include="Domain\Services\MedicamentoService.cs" />
+    <Compile Include="Domain\Services\OrdenService.cs" />
+    <Compile Include="Domain\Services\PacienteService.cs" />
+    <Compile Include="Domain\Services\ProcedimientoService.cs" />
+    <Compile Include="Domain\Services\UsuarioService.cs" />
     <Compile Include="Business\AyudaDiagnosticaBL.cs" />
     <Compile Include="Business\FacturacionBL.cs" />
     <Compile Include="Business\LoginBL.cs" />

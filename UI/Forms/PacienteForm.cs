@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using ClinicaIPS_U.Application.Services;
+using ClinicaIPS_U.Domain.Services;
 using ClinicaIPS_U.Domain.Entities;
 using ClinicaIPS_U.Domain.ValueObjects;
 
