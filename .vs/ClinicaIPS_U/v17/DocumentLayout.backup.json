@@ -1,10 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\xampp\\htdocs\\VisualStudio2022\\HrrP1\\ClinicaIPS_U\\",
+  "WorkspaceRootPath": "C:\\Users\\julia\\OneDrive\\Desktop\\Proyect_Clinica\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{915C0C34-9AC9-4276-974E-E704C2422D23}|ClinicaIPS_U.csproj|c:\\xampp\\htdocs\\visualstudio2022\\hrrp1\\clinicaips_u\\data\\conexiondb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{915C0C34-9AC9-4276-974E-E704C2422D23}|ClinicaIPS_U.csproj|solutionrelative:data\\conexiondb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{915C0C34-9AC9-4276-974E-E704C2422D23}|ClinicaIPS_U.csproj|c:\\users\\julia\\onedrive\\desktop\\proyect_clinica\\validations\\validador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{915C0C34-9AC9-4276-974E-E704C2422D23}|ClinicaIPS_U.csproj|solutionrelative:validations\\validador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ConexionDB.cs",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\VisualStudio2022\\HrrP1\\ClinicaIPS_U\\Data\\ConexionDB.cs",
-              "RelativeDocumentMoniker": "Data\\ConexionDB.cs",
-              "ToolTip": "C:\\xampp\\htdocs\\VisualStudio2022\\HrrP1\\ClinicaIPS_U\\Data\\ConexionDB.cs",
-              "RelativeToolTip": "Data\\ConexionDB.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Title": "Validador.cs",
+              "DocumentMoniker": "C:\\Users\\julia\\OneDrive\\Desktop\\Proyect_Clinica\\Validations\\Validador.cs",
+              "RelativeDocumentMoniker": "Validations\\Validador.cs",
+              "ToolTip": "C:\\Users\\julia\\OneDrive\\Desktop\\Proyect_Clinica\\Validations\\Validador.cs",
+              "RelativeToolTip": "Validations\\Validador.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-07T23:27:08.04Z",
+              "WhenOpened": "2025-09-20T16:08:58.646Z",
               "EditorCaption": ""
             }
           ]
