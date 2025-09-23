@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 using System.Windows.Forms;
-
-using ClinicaIPS_U.Business;
+using ClinicaIPS_U.Domain.Entities;
+using ClinicaIPS_U.Infrastructure.Configuration;
 
 namespace ClinicaIPS_U.UI {
     public partial class LoginForm : Form {
-        public LoginForm() {
+        private readonly AppServiceProvider _services;
+
+        public LoginForm(AppServiceProvider services) {
             InitializeComponent();
+            _services = services;
         }
 
         private void btnSalir_Click(object sender, EventArgs e) {
@@ -21,18 +17,16 @@ namespace ClinicaIPS_U.UI {
         }
 
         private void btnIngresar_Click(object sender, EventArgs e) {
-            LoginBL loginBL = new LoginBL();
-            string rol = loginBL.ValidarUsuario(txtUsuario.Text, txtContraseña.Text);
+            Usuario usuario = _services.Usuarios.Login(txtUsuario.Text, txtContraseña.Text);
 
-            if (rol != null)
-            {
-                MessageBox.Show($"Bienvenido, rol: {rol}");
+            if (usuario != null) {
+                MessageBox.Show($"Bienvenido, rol: {usuario.Rol}");
 
-                // Pasamos el rol al menú
-                MenuPrincipal menu = new MenuPrincipal(rol);
-                this.Hide();
-                menu.ShowDialog();
-                this.Close();
+                using (var menu = new MenuPrincipal(_services, usuario)) {
+                    Hide();
+                    menu.ShowDialog();
+                    Show();
+                }
             } else {
                 MessageBox.Show("Usuario o contraseña incorrectos");
             }

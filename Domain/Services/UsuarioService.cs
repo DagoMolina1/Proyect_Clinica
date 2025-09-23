@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using ClinicaIPS_U.Domain.Entities;
 using ClinicaIPS_U.Domain.Interfaces;
 
-namespace ClinicaIPS_U.Application.Services {
+namespace ClinicaIPS_U.Domain.Services {
     public class UsuarioService {
         private readonly IUsuarioRepository _usuarioRepository;
 
@@ -31,6 +31,8 @@ namespace ClinicaIPS_U.Application.Services {
         public void Eliminar(string cedula) => _usuarioRepository.Delete(cedula);
 
         public Usuario BuscarPorCedula(string cedula) => _usuarioRepository.GetByCedula(cedula);
+
+        public Usuario BuscarPorId(int idUsuario) => _usuarioRepository.GetById(idUsuario);
 
         public Usuario Login(string usuario, string contraseña) => _usuarioRepository.GetByLogin(usuario, contraseña);
 
