@@ -58,6 +58,7 @@
     <Compile Include="Domain\ValueObjects\DocumentoIdentidad.cs" />
     <Compile Include="Domain\ValueObjects\Email.cs" />
     <Compile Include="Domain\ValueObjects\Telefono.cs" />
+    <Compile Include="Domain\ValueObjects\Validador.cs" />
     <Compile Include="Infrastructure\Configuration\AppServiceProvider.cs" />
     <Compile Include="Infrastructure\Data\AyudaDiagnosticaRepository.cs" />
     <Compile Include="Infrastructure\Data\ConexionDB.cs" />
@@ -167,7 +168,6 @@
     <Compile Include="UI\Forms\UsuarioForm.Designer.cs">
       <DependentUpon>UsuarioForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Validations\Validador.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
