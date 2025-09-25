@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using ClinicaIPS_U.Domain.Entities;
 using ClinicaIPS_U.Domain.Interfaces;
-using ClinicaIPS_U.Validations;
+using ClinicaIPS_U.Domain.ValueObjects;
 
 namespace ClinicaIPS_U.Domain.Services {
     public class PacienteService {
@@ -41,6 +41,28 @@ namespace ClinicaIPS_U.Domain.Services {
 
             if (!Validador.EsFechaNacimientoValida(paciente.FechaNacimiento)) {
                 throw new ArgumentException("La fecha de nacimiento no es válida. El paciente debe tener entre 0 y 150 años.");
+            }
+
+            try {
+                var cedulaValor = paciente.Cedula?.Value ?? throw new ArgumentException("La cédula no es válida.");
+                _ = new DocumentoIdentidad(cedulaValor);
+            } catch (ArgumentException) {
+                throw new ArgumentException("La cédula no es válida.");
+            }
+
+            try {
+                var telefonoValor = paciente.Telefono?.Value ?? throw new ArgumentException("El teléfono debe tener 10 dígitos.");
+                _ = new Telefono(telefonoValor);
+            } catch (ArgumentException) {
+                throw new ArgumentException("El teléfono debe tener 10 dígitos.");
+            }
+
+            if (paciente.Correo != null) {
+                try {
+                    _ = new Email(paciente.Correo.Value);
+                } catch (ArgumentException) {
+                    throw new ArgumentException("El correo electrónico no es válido.");
+                }
             }
 
             if (string.IsNullOrWhiteSpace(paciente.UsuarioPortal) || paciente.UsuarioPortal.Length > 15 || !Regex.IsMatch(paciente.UsuarioPortal, @"^[A-Za-z0-9]+$")) {
